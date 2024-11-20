@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Our Love Quiz 💖</title>
+    <style>
+        /* General Mobile Optimizations */
+body {
+    font-size: 16px; /* Default text size */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #ffe6e6;
+}
+
+/* Button Enhancements for Mobile */
+button {
+    font-size: 1rem; /* Scale with screen size */
+    padding: 15px 20px; /* Better touch target */
+    max-width: 300px;
+    margin: 10px auto;
+}
+
+/* Image and GIF Adjustments */
+img {
+    max-width: 100%; /* Ensure it fits within the viewport */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Question Box for Mobile */
+.question-box {
+    padding: 15px;
+    margin: 10px auto;
+    font-size: 1rem;
+}
+
+/* Result Section */
+.result img {
+    max-width: 80%; /* Scale within the viewport */
+    height: auto;
+}
+
+/* iPhone XR-Specific Adjustments */
+@media (max-width: 828px) and (orientation: portrait) {
+    h1 {
+        font-size: 1.8em; /* Adjust for smaller screen */
+    }
+    .question-box {
+        font-size: 1rem; /* Scale text size */
+    }
+    button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+    .result img {
+        width: 200px; /* Optimize for iPhone XR */
+    }
+    #prizeMessage, #dateMessage {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape Mode Tweaks */
+@media (max-width: 828px) and (orientation: landscape) {
+    h1 {
+        font-size: 1.6em;
+    }
+    button {
+        font-size: 0.9rem;
+        padding: 10px 10px;
+    }
+    .result img {
+        max-width: 50%;
+    }
+    .question-box {
+        font-size: 0.9rem;
+    }
+}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #ffe6e6;
+        }
+        #homepage, #quiz, #result, #prizeMessage, #dateMessage {
+            display: none;
+        }
+        #homepage {
+            display: block;
+            padding: 20px;
+        }
+        #question {
+            font-size: 1.8em;
+            color: #ff3366; /* Nice pinkish color to match the theme */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+            line-height: 1.5; /* Improve readability */
+            margin-bottom: 20px; /* Add spacing below the question */
+        }
+        #correctGif img, #wrongGif img {
+            width: 100%; /* Default size */
+            max-width: 75px; /* Limit the maximum size */
+            height: auto; /* Maintain aspect ratio */
+        }
+        @media (max-width: 480px) {
+        #correctGif img, #wrongGif img {
+            max-width: 75px; /* Smaller size for mobile */
+            }
+        }
+
+        h1 {
+            color: #ff6699;
+            font-size: 2.5em;
+            animation: bounce 2s infinite;
+            margin-bottom: 15px;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        img {
+            max-width: 80%;
+            border-radius: 15px;
+            margin: 20px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #ff6699;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            width: 100%;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button:hover {
+            background-color: #e65c87;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .question-box {
+            background: white;
+            border: 2px solid #ff99cc;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .result {
+            font-size: 20px;
+            color: #ff3366;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .result img {
+            width: 250px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .feedback {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .wrong {
+            color: red;
+        }
+
+        /* Prize Message */
+        #prizeMessage {
+            display: none;
+            background-color: #fff0f0;
+            border: 2px solid #ff3366;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        #prizeMessage h2 {
+            color: #ff3366;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        #prizeMessage button {
+            background-color: #ff3366;
+            color: white;
+            padding: 12px 25px;
+            font-size: 18px;
+            margin-top: 15px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #prizeMessage button:hover {
+            background-color: #e6244d;
+            transform: scale(1.05);
+        }
+
+        /* Date Message */
+        #dateMessage {
+            display: none;
+            background-color: #fff0f0;
+            border: 2px solid #ff6699;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        #dateMessage h2 {
+            color: #ff6699;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        #dateMessage p {
+            font-size: 1.3em;
+            color: #ff3366;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .result img {
+                width: 200px;
+            }
+            .question-box {
+                padding: 15px;
+                margin: 10px;
+            }
+            button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+            #prizeMessage, #dateMessage {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            .result img {
+                width: 180px;
+            }
+            .question-box {
+                padding: 10px;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            #prizeMessage, #dateMessage {
+                padding: 15px;
+            }
+        }
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- Homepage -->
+    <div id="homepage">
+        <h1>Welcome to Our Love Quiz 💖</h1>
+        <img src="https://media.tenor.com/YeALWQcVFpEAAAAi/bubu-dudu-rose-dudu-propose.gif" alt="Love Image">
+        <p>Test how well you know our love story! 💕</p>
+        <button onclick="startQuiz()">Start the Game</button>
+    </div>
+
+    <!-- Quiz -->
+    <div id="quiz" class="question-box">
+        <p id="question">Loading question...</p>
+        <button onclick="answer(1)">Option 1</button>
+        <button onclick="answer(2)">Option 2</button>
+        <button onclick="answer(3)">Option 3</button>
+        <button onclick="answer(4)">Option 4</button>
+        <div id="feedback" class="feedback"></div> <!-- Feedback message -->
+        <div id="correctGif" style="display:none;">
+            <img src="https://media.tenor.com/RMGP_YzIvcMAAAAi/super-bubu.gif" alt="Correct Answer GIF">
+        </div>
+        <div id="wrongGif" style="display:none;">
+            <img src="https://media.tenor.com/rhYHfRBLbH8AAAAi/dudu-playing-with-bubu-dudu.gif" alt="Wrong Answer GIF">
+        </div>
+    </div>
+
+<!-- Result -->
+<div id="result" class="result" style="display: none;">
+    <h2>Your Score: <span id="score"></span> / 8</h2>
+    <img id="finalGif" src="" alt="Final Score GIF" style="display:none; margin-top: 20px;">
+    <button id="claimPrizeButton" onclick="claimPrize()">Claim Your Prize!</button>
+</div>
+
+<!-- Prize Message -->
+<div id="prizeMessage" style="display: none;">
+    <h2>Congratulations! 💖</h2>
+    <p>Would you like to go on a date with me? 💕</p>
+    <button onclick="showDateMessage()">Yes, I would love to!</button>
+    <button id="noButton" onclick="declineDate()">No, thank you.</button>
+
+    
+</div>
+
+<!-- Date Details -->
+<div id="dateMessage" style="display: none;">
+    <h2>Our Date Details:</h2>
+    <p>I'm so excited for our date! We'll be going to a wonderful date on <strong>Saturday, November 23rd, 2024</strong>. Can't wait to spend time together! 💕</p>
+</div>
+
+
+    <script>
+        window.onload = function() {
+        const music = document.getElementById('backgroundMusic');
+        music.volume = 0.3;  // Lower volume to 30%
+        };
+        const questions = [
+            { question: "Kanusa ta first nagchat?", options: ["November 17", "January 30", "February 21", "December 15"], correct: 4 },
+            { question: "Nagunsa ta sa first date?", options: ["Kaon", "Simba", "Shopping", "Suroy"], correct: 2 },
+            { question: "First Restaurant na ato ge kaonan?", options: ["Mang Inasal", "Jollibee", "KFC", "Mc Donalds"], correct: 1 },
+            { question: "Kanusa atong anniversary?", options: ["November 21", "December 21", "Januray 21", "February 21"], correct: 4 },
+            { question: "Unsa ato favorite color?", options: ["Red", "Dark", "Yellow", "Green"], correct: 2 },
+            { question: "First call sign nato?", options: ["Love", "By", "Mahal", "Honey"], correct: 2 },
+            { question: "Asa ta nageat atong first birthday nimo?", options: ["Light House", "P.O.P.S", "Jollibee", "Yakimix"], correct: 1 },
+            { question: "First samgyeopsal nato asa?", options: ["SamgyupSalamat", "Mr Kim`s Samgyupsal", "Romantic Baboy", "Mukbang Ta Ja!"], correct: 2 },
+        ];
+    
+        let currentQuestion = 0;
+        let score = 0;
+        let noButtonClicks = 0; // Added this initialization
+    
+        function startQuiz() {
+             // Start the background music when the user clicks the button
+            const music = document.getElementById('backgroundMusic');
+            music.play();  // Ensure music plays after user interaction
+            document.getElementById('homepage').style.display = 'none';
+            document.getElementById('quiz').style.display = 'block';
+            showQuestion();
+        }
+    
+        function showQuestion() {
+            const questionObj = questions[currentQuestion];
+            const questionText = document.getElementById('question');
+            questionText.textContent = questionObj.question;
+    
+            const buttons = document.querySelectorAll('#quiz button');
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].textContent = questionObj.options[i];
+                buttons[i].style.backgroundColor = '#ff6699'; // Reset button color to normal
+            }
+        }
+    
+        function answer(option) {
+            const questionObj = questions[currentQuestion];
+            const feedback = document.getElementById('feedback');
+            const buttons = document.querySelectorAll('#quiz button');
+            const correctGif = document.getElementById('correctGif');
+            const wrongGif = document.getElementById('wrongGif');
+            
+            // Hide both GIFs initially
+            correctGif.style.display = 'none';
+            wrongGif.style.display = 'none';
+            
+            // Check if answer is correct or wrong
+            if (option === questionObj.correct) {
+                feedback.textContent = 'Correct! 💖';
+                feedback.className = 'feedback correct';
+                buttons[option - 1].style.backgroundColor = 'green';
+                score++;
+                correctGif.style.display = 'block';  // Show correct answer GIF
+            } else {
+                feedback.textContent = 'Wrong! 😞';
+                feedback.className = 'feedback wrong';
+                buttons[option - 1].style.backgroundColor = 'red';
+                wrongGif.style.display = 'block';  // Show wrong answer GIF
+            }
+    
+            // Disable all buttons
+            buttons.forEach(btn => btn.disabled = true);
+    
+            setTimeout(() => {
+                // Hide GIFs after 1 second
+                correctGif.style.display = 'none';
+                wrongGif.style.display = 'none';
+                
+                currentQuestion++;  // Move to the next question
+                if (currentQuestion < questions.length) {
+                    showQuestion(); // Next question after a slight delay
+                    feedback.textContent = ''; // Reset feedback
+                    buttons.forEach(btn => btn.disabled = false);  // Enable buttons again
+                } else {
+                    endQuiz();
+                }
+            }, 1000);
+        }
+    
+        function endQuiz() {
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'block';
+    document.getElementById('score').textContent = score;   
+
+    const finalGif = document.getElementById('finalGif');
+    const resultMessage = document.createElement('p'); // Create a paragraph for the message
+    resultMessage.style.fontSize = '0.75em'; // Style the message text
+    resultMessage.style.color = '#ff3366';
+    resultMessage.style.marginTop = '5px';
+
+    if (score === questions.length) {
+    finalGif.src = 'https://media.tenor.com/DG1DUfqaSr8AAAAi/dudu-bubu-playing.gif';
+    finalGif.alt = 'Perfect Score!';
+    resultMessage.textContent = 'You’re absolutely amazing! 💕 You know our love story perfectly!';
+} else if (score > questions.length / 2) {
+    finalGif.src = 'https://media.tenor.com/RHMgPuUz1-kAAAAi/bear-panda.gif';
+    finalGif.alt = 'Good Effort!';
+    resultMessage.textContent = 'Great job! 💕 You know us so well!';
+} else {
+    finalGif.src = 'https://media.tenor.com/0cNM_9li440AAAAi/dudu-giving-flowers-bubu-flowers.gif';
+    finalGif.alt = 'Try Again!';
+    resultMessage.textContent = 'Oops, looks like some of our moments slipped your mind! 🌸 Don’t worry, every love story is a journey, and we’ll make even more memories together. 💕 You’re still my favorite, no matter what! ❤️';
+}
+
+    finalGif.style.display = 'block';
+    const resultDiv = document.getElementById('result');
+    resultDiv.appendChild(resultMessage); // Append the message below the final GIF
+}
+
+function claimPrize() {
+    document.getElementById('result').style.display = 'none'; // Hides the result section
+    document.getElementById('prizeMessage').style.display = 'block'; // Displays the prize message
+}
+
+    
+        function showDateMessage() {
+            document.getElementById('prizeMessage').style.display = 'none';
+            document.getElementById('dateMessage').style.display = 'block';
+        }
+    
+        // Function for when "No" button is clicked
+        function declineDate() {
+            if (noButtonClicks < 3) {
+                noButtonClicks++;
+                moveNoButton();
+            } else {
+                document.getElementById("noButton").remove();
+                alert("Haha, Remove nako imo gina click!");
+            }
+        }
+    
+        // Move the "No" button to a random position
+        function moveNoButton() {
+            const button = document.getElementById("noButton");
+            const maxWidth = window.innerWidth - button.offsetWidth;
+            const maxHeight = window.innerHeight - button.offsetHeight;
+    
+            const randomX = Math.random() * maxWidth;
+            const randomY = Math.random() * maxHeight;
+    
+            button.style.position = "absolute";
+            button.style.left = randomX + "px";
+            button.style.top = randomY + "px";
+        }
+    </script>    
+</body>
+</html>
